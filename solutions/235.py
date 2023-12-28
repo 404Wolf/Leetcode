@@ -9,6 +9,8 @@ class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         currentBest = root
 
+        # Binary search p and q to check whether they exist, and return True if they are both in 
+        # node's subtree
         def bothAreDescendants(node):
             for shouldBeInSubtree in (p, q):
                 cursor = node
@@ -21,6 +23,7 @@ class Solution:
                         cursor = cursor.right
             return True
 
+        # Built a depth-first-traversal array of the contents of the tree using a queue
         allNodes = []
         queue = [root]
         while queue:
@@ -30,6 +33,8 @@ class Solution:
             if current.right:
                 queue.append(current.right)
 
+        # Iterate from the bottom level to try to find the lowest node that contains both p 
+        # and q
         for node in reversed(allNodes):
             if bothAreDescendants(node):
                 return node

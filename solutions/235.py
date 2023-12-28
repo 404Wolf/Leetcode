@@ -22,17 +22,13 @@ class Solution:
             return True
 
         bestSoFar = root
-        allNodes = []
         queue = [root]
         while queue:
-            allNodes.append(current := queue.pop())
+            if bothAreDescendants(current := queue.pop()):
+                bestSoFar = node
             if current.left:
                 queue.append(current.left)
             if current.right:
                 queue.append(current.right)
-        for node in allNodes:
-            print(node.val, bothAreDescendants(node))
-            if bothAreDescendants(node):
-                bestSoFar = node
 
         return bestSoFar

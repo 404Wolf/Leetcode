@@ -25,7 +25,7 @@ class Solution:
         queue = [root]
         while queue:
             if bothAreDescendants(current := queue.pop()):
-                bestSoFar = node
+                bestSoFar = current
             if current.left:
                 queue.append(current.left)
             if current.right:

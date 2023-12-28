@@ -21,14 +21,15 @@ class Solution:
                         cursor = cursor.right
             return True
 
-        bestSoFar = root
+        allNodes = []
         queue = [root]
         while queue:
-            if bothAreDescendants(current := queue.pop()):
-                bestSoFar = current
+            allNodes.append(current := queue.pop())
             if current.left:
                 queue.append(current.left)
             if current.right:
                 queue.append(current.right)
 
-        return bestSoFar
+        for node in reversed(allNodes):
+            if bothAreDescendants(node):
+                return node
